@@ -2,8 +2,8 @@
 
 namespace Tests\Shared\Domain\ValueObjects;
 
-use PHPUnit\Framework\TestCase;
 use Shared\Domain\ValueObjects\Generic\Text;
+use Tests\TestCase;
 
 class TextTest extends TestCase
 {

@@ -4,7 +4,7 @@ namespace Shared\Domain\ValueObjects\Generic;
 
 class Text
 {
-    public function __construct(public readonly string $value = '')
+    public function __construct(public string $value = '')
     {
     }
 
