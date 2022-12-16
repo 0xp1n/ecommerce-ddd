@@ -4,7 +4,7 @@ namespace Shared\Domain\ValueObjects\Generic;
 
 class Text
 {
-    public function __construct(public string $value = '')
+    public function __construct(private readonly string $value = '')
     {
     }
 
@@ -13,14 +13,14 @@ class Text
         return $this->value;
     }
 
-    public function sanitized(): string
+    public function sanitize(): string
     {
         return trim(strip_tags($this->value()));
     }
 
     public function equalsTo(self $other): bool
     {
-        return $this->sanitized() === $other->sanitized();
+        return $this->sanitize() === $other->sanitize();
     }
 
     public function notEqualsTo(self $other): bool
@@ -44,11 +44,11 @@ class Text
 
     public function toLowerCase(): string
     {
-        return mb_strtolower($this->sanitized(), 'UTF-8');
+        return mb_strtolower($this->sanitize(), 'UTF-8');
     }
 
     public function toUpperCase(): string
     {
-        return mb_strtoupper($this->sanitized(), 'UTF-8');
+        return mb_strtoupper($this->sanitize(), 'UTF-8');
     }
 }

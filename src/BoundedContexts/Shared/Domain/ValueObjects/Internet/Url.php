@@ -7,7 +7,7 @@ use Shared\Domain\ValueObjects\Generic\Text;
 
 class Url extends Text
 {
-    public function __construct(public string $value)
+    public function __construct(string $value)
     {
         parent::__construct($this->validate($value));
     }

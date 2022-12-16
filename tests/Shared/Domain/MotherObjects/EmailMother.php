@@ -2,10 +2,10 @@
 
 namespace Tests\Shared\Domain\MotherObjects;
 
-class UuidMother
+class EmailMother
 {
     public static function create(): string
     {
-        return MotherCreator::random()->uuid();
+        return MotherCreator::random()->email();
     }
 }
