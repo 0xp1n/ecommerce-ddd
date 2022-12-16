@@ -8,4 +8,9 @@ class EmailMother
     {
         return MotherCreator::random()->email();
     }
+
+    public static function createCompanyEmail(): string
+    {
+        return MotherCreator::random()->companyEmail();
+    }
 }

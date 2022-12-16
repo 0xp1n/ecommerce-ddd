@@ -22,7 +22,9 @@ class EmailTest extends TestCase
     public function test_it_should_instantiate_correct_the_object_when_email_is_valid(): void
     {
         $email = new Email(EmailMother::create());
+        $company_email = new Email(EmailMother::createCompanyEmail());
 
         $this->assertEquals($email->parts(), [$email->local(), $email->domain()]);
+        $this->assertEquals($company_email->parts(), [$company_email->local(), $company_email->domain()]);
     }
 }
