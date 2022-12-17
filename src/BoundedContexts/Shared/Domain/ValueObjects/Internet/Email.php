@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Domain\ValueObjects\Internet;
 
-use InvalidArgumentException;
 use Shared\Domain\ValueObjects\Generic\Text;
 
 class Email extends Text
@@ -36,7 +37,7 @@ class Email extends Text
         $email = $this->sanitizeEmail($value);
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new  InvalidArgumentException("The value {$value} is not a valid email");
+            throw new \InvalidArgumentException("The value {$value} is not a valid email");
         }
 
         return $email;
