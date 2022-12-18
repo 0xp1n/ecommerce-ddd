@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Domain\ValueObjects\Contact;
 
 use Shared\Domain\ValueObjects\Generic\Text;

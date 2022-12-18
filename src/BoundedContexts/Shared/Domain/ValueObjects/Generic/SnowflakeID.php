@@ -6,18 +6,11 @@ namespace Shared\Domain\ValueObjects\Generic;
 
 use Godruoyi\Snowflake\Snowflake;
 
-class SnowflakeID
+class SnowflakeID extends UnsignedInteger
 {
-    private readonly int $value;
-
     public function __construct(int $value = null)
     {
-        $this->value = $value ?? self::generate();
-    }
-
-    public function value(): int
-    {
-        return $this->value;
+        parent::__construct($value ?? self::generate());
     }
 
     public static function random(): self

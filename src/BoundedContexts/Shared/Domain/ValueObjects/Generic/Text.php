@@ -36,7 +36,7 @@ class Text
     }
 
     /** Multi-byte character support
-     *
+     * More info in https://beamtic.com/count-characters-php
      * @return int
      */
     public function count(): int
