@@ -20,7 +20,7 @@ class UnsignedInteger extends Integer
                 'min_range' => 0,
             ],
         ])) {
-            throw new \InvalidArgumentException("The number {$value} is not a positive integer");
+            throw new \InvalidArgumentException("The given number {$value} cannot be negative");
         }
     }
 }
