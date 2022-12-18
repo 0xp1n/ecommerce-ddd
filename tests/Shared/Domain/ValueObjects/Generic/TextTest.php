@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Shared\Domain\ValueObjects;
+namespace Tests\Shared\Domain\ValueObjects\Generic;
 
 use Shared\Domain\ValueObjects\Generic\Text;
 use Tests\TestCase;

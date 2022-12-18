@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Shared\Domain\ValueObjects;
+namespace Tests\Shared\Domain\ValueObjects\Internet;
 
 use InvalidArgumentException;
 use Shared\Domain\ValueObjects\Internet\Url;
