@@ -12,7 +12,8 @@ class Customer extends AggregateRoot
         private readonly CustomerId $id,
         private readonly CustomerName $name,
         private readonly CustomerEmail $email,
-        private readonly CustomerPhoneNumber $phone_number
+        private readonly ?CustomerPhoneNumber $phone_number = null,
+        private readonly ?CustomerAddress $address =  null,
     ) {
     }
 
@@ -34,5 +35,10 @@ class Customer extends AggregateRoot
     public function phone_number(): ?CustomerPhoneNumber
     {
         return $this->phone_number;
+    }
+
+    public function address(): ?CustomerAddress
+    {
+        return $this->address;
     }
 }
