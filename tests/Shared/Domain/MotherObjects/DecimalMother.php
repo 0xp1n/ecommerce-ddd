@@ -6,6 +6,6 @@ class DecimalMother
 {
     public static function create(): float
     {
-        return MotherCreator::random()->randomFloat();
+        return MotherCreator::random()->randomFloat(2);
     }
 }

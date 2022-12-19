@@ -46,6 +46,10 @@ class Money
             $other->amount()->equalsTo($this->amount());
     }
 
+    public function isGreaterThanZero(): bool
+    {
+        return $this->amount()->isGreaterThanZero();
+    }
     public function isZero(): bool
     {
         return $this->amount()->isZero();

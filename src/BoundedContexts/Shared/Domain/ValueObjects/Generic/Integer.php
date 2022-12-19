@@ -70,6 +70,11 @@ class Integer
         return $this->value() < 0;
     }
 
+    public function isGreaterThanZero(): bool
+    {
+        return $this->value() === 0;
+    }
+
     public function isZero(): bool
     {
         return $this->value() === 0;
