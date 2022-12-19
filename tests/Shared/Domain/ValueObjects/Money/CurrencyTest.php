@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Shared\Domain\ValueObjects\Internet;
+namespace Tests\Shared\Domain\ValueObjects\Money;
 
 use Shared\Domain\ValueObjects\Money\Currency;
 use Tests\Shared\Domain\MotherObjects\CurrencyMother;
@@ -22,17 +22,6 @@ class CurrencyTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
 
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
-        new Currency(CurrencyMother::create());
         new Currency(CurrencyMother::create());
         new Currency(CurrencyMother::create());
         new Currency(CurrencyMother::create());

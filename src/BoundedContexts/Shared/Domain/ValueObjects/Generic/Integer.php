@@ -55,6 +55,11 @@ class Integer
         return new self($this->value() * $other->value());
     }
 
+    public function divide(self $other): self
+    {
+        return new self((int)($this->value() / $other->value()));
+    }
+
     public function isPositive(): bool
     {
         return $this->value() > 0;

@@ -8,6 +8,7 @@ use Shared\Domain\ValueObjects\Generic\Text;
 
 class Currency extends Text
 {
+    // ISO 4127
     // https://html-css-js.com/html/character-codes/currency/
     public const CODES = [
         'ALL' => [
