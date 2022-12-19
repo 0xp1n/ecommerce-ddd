@@ -4,6 +4,7 @@ namespace Tests\Shared\Domain\ValueObjects\Money;
 
 use InvalidArgumentException;
 use Shared\Domain\ValueObjects\Generic\Integer;
+use Shared\Domain\ValueObjects\Generic\Percentage;
 use Shared\Domain\ValueObjects\Money\Currency;
 use Shared\Domain\ValueObjects\Money\Money;
 use Tests\Shared\Domain\MotherObjects\MoneyMother;
@@ -48,6 +49,22 @@ class MoneyTest extends TestCase
 
         $this->assertEquals(2000, $result->amount()->value());
         $this->assertEquals(20, $result->decimal()->value());
+    }
+
+    public function test_it_should_be_able_to_increase_amount_by_percentage(): void
+    {
+        $money = MoneyMother::create(new Integer(1000), new Currency('EUR'));
+        $result = $money->increaseByPercentage(new Percentage(10));
+
+        $this->assertEquals(1100, $result->amount()->value());
+    }
+
+    public function test_it_should_be_able_to_decrease_amount_by_percentage(): void
+    {
+        $money = MoneyMother::create(new Integer(1000), new Currency('EUR'));
+        $result = $money->decreaseByPercentage(new Percentage(10));
+
+        $this->assertEquals(900, $result->amount()->value());
     }
 
     public function test_it_should_throw_exception_when_try_to_sum_different_currencies(): void
