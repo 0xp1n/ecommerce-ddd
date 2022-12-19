@@ -6,7 +6,9 @@ namespace Shared\Domain\ValueObjects\Money;
 
 use InvalidArgumentException;
 use NumberFormatter;
+use Shared\Domain\ValueObjects\Generic\Decimal;
 use Shared\Domain\ValueObjects\Generic\Integer;
+use Shared\Domain\ValueObjects\Generic\Percentage;
 use Tests\Shared\Domain\ValueObjects\Geography\Locale;
 
 class Money
@@ -22,9 +24,9 @@ class Money
         return $this->amount;
     }
 
-    public function value(): float
+    public function decimal(): Decimal
     {
-        return $this->amount()->value() / 100;
+        return new Decimal($this->amount()->value() / 100);
     }
 
     public function currency(): Currency
@@ -35,7 +37,7 @@ class Money
     public function formatted(Locale $locale = null): string
     {
         return (new NumberFormatter($locale?->value() ?? 'en_US', NumberFormatter::CURRENCY))
-            ->formatCurrency($this->value(), $this->currency()->value());
+            ->formatCurrency($this->decimal()->value(), $this->currency()->value());
     }
 
     public function equals(self $other): bool
@@ -52,9 +54,9 @@ class Money
     public function sum(self $other): self
     {
         if ($this->isSameCurrency($other)) {
-            return new Money(
-                $other->amount()->sum($other->amount()),
-                $other->currency()
+            return new self(
+                $this->amount()->sum($other->amount()),
+                $this->currency()
             );
         }
 
@@ -64,9 +66,9 @@ class Money
     public function subtract(self $other): self
     {
         if ($this->isSameCurrency($other)) {
-            return new Money(
-                $other->amount()->subtract($other->amount()),
-                $other->currency()
+            return new self(
+                $this->amount()->subtract($other->amount()),
+                $this->currency()
             );
         }
 
@@ -76,25 +78,37 @@ class Money
     public function multiply(self $other): self
     {
         if ($this->isSameCurrency($other)) {
-            return new Money(
-                $other->amount()->multiply($other->amount()),
-                $other->currency()
+            return new self(
+                $this->amount()->multiply($other->amount()),
+                $this->currency()
             );
         }
 
         throw new InvalidArgumentException("The currency is not the same, cannot be multiplied");
     }
 
-    public function divide(self $other): self
+    public function increaseByPercentage(Percentage $percentage): self
     {
-        if ($this->isSameCurrency($other)) {
-            return new Money(
-                $other->amount()->divide($other->amount())->multiply(new Integer(100)),
-                $other->currency()
-            );
-        }
+        return $this->sum(
+            new Money(
+                new Integer(
+                    (int)round($this->amount()->value() * $percentage->value() / 100, 2, PHP_ROUND_HALF_UP)
+                ),
+                $this->currency()
+            )
+        );
+    }
 
-        throw new InvalidArgumentException("The currency is not the same, cannot be divided");
+    public function decreaseByPercentage(Percentage $percentage): self
+    {
+        return $this->subtract(
+            new Money(
+                new Integer(
+                    (int)round($this->amount()->value() * $percentage->value() / 100, 2, PHP_ROUND_HALF_UP)
+                ),
+                $this->currency()
+            )
+        );
     }
 
     private function isSameCurrency(self $other): bool
