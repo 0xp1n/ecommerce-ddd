@@ -6,8 +6,13 @@ namespace Shared\Domain\ValueObjects\Generic;
 
 class Decimal
 {
-    public function __construct(private readonly float $value)
+    private readonly float $value;
+
+    public function __construct(float $value)
     {
+        $this->validate($value);
+
+        $this->value = $value;
     }
 
     public function value(): float
@@ -73,5 +78,12 @@ class Decimal
     public function isZero(): bool
     {
         return $this->value() === 0;
+    }
+
+    private function validate(float $value)
+    {
+        if (!filter_var($value, FILTER_VALIDATE_FLOAT)) {
+            throw new \InvalidArgumentException("The value {$value} must be a valid float.");
+        }
     }
 }

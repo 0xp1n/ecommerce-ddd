@@ -9,7 +9,7 @@ use NumberFormatter;
 use Shared\Domain\ValueObjects\Generic\Decimal;
 use Shared\Domain\ValueObjects\Generic\Integer;
 use Shared\Domain\ValueObjects\Generic\Percentage;
-use Tests\Shared\Domain\ValueObjects\Geography\Locale;
+use Shared\Domain\ValueObjects\Geography\LanguageLocale;
 
 class Money
 {
@@ -34,7 +34,7 @@ class Money
         return $this->currency;
     }
 
-    public function formatted(Locale $locale = null): string
+    public function formatted(LanguageLocale $locale = null): string
     {
         return (new NumberFormatter($locale?->value() ?? 'en_US', NumberFormatter::CURRENCY))
             ->formatCurrency($this->decimal()->value(), $this->currency()->value());

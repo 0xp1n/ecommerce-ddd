@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Shared\Domain\ValueObjects\Geography;
+namespace Shared\Domain\ValueObjects\Geography;
 
 use Shared\Domain\ValueObjects\Generic\Text;
 
-class Locale extends Text
+class LanguageLocale extends Text
 {
     public function __construct(string $locale)
     {
@@ -20,5 +20,14 @@ class Locale extends Text
         if (!in_array($value, \ResourceBundle::getLocales(''))) {
             throw new \InvalidArgumentException("The locale {$value} does not exists");
         }
+    }
+
+    public static function makeFromCountryCode(CountryCode $countryCode): self
+    {
+        $locale =  \Locale::getPrimaryLanguage(
+            $countryCode->value()
+        ) . '_' . \Locale::getRegion($countryCode->value());
+
+        return new self($locale);
     }
 }

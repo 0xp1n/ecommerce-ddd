@@ -21,9 +21,9 @@ class PostalCode extends Text
         return $this->country;
     }
 
-    private function validate(string $value): void
+    public static function validationRuleBasedOnCountry(string $country): string
     {
-        $regex = match ($this->country()->value()) {
+        return match ($country) {
             'AF' => "/[0-9]{4}/",
             'AL' => "/(120|122)[0-9]{2}/",
             'DZ' => '/[0-9]{5}/',
@@ -251,6 +251,11 @@ class PostalCode extends Text
             'ZM' => '/[0-9]{5}/',
             'ZW' => '/^\d{5}$/',
         };
+    }
+
+    private function validate(string $value): void
+    {
+        $regex = self::validationRuleBasedOnCountry($this->country()->value());
 
         if (!preg_match($regex, $value)) {
             throw new \InvalidArgumentException("The given postcode {$value} is not valid for country {$this->country()->value()}");
